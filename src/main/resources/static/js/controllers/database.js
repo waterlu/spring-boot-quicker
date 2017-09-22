@@ -10,13 +10,19 @@ angular.module('app').controller('DatabaseController', ['$scope', '$http', '$sta
     $scope.dbName = 'kingold';
     $scope.dbUsername = 'zj_admin';
     $scope.dbPassword = '123456';
+    $scope.maxRows = 100;
 
-    $scope.initDefaultDependency = function() {
+    $scope.tables = [];
+    $scope.row_status = [];
+    for (var i = 0; i < $scope.maxRows; i++) {
+        $scope.row_status[i] = true;
+    }
 
-
+    $scope.resetRowStatus = function () {
+        for (var i = 0; i < $scope.row_status.length; i++) {
+            $scope.row_status[i] = true;
+        }
     };
-
-    $scope.initDefaultDependency();
 
     $scope.testDBConnection = function () {
         var param = {
@@ -49,6 +55,46 @@ angular.module('app').controller('DatabaseController', ['$scope', '$http', '$sta
         }).error(function (data) {
             console.log('data=' + data);
         });
+    };
+
+    $scope.readTables = function () {
+        var param = {
+            'dbType': null,
+            'dbIP': null,
+            'dbPort': null,
+            'dbName': null,
+            'dbUsername': null,
+            'dbPassword': null
+        };
+
+        param.dbType = $scope.dbType;
+        param.dbIP = $scope.dbIP;
+        param.dbPort = $scope.dbPort;
+        param.dbName = $scope.dbName;
+        param.dbUsername = $scope.dbUsername;
+        param.dbPassword = $scope.dbPassword;
+
+        var jsonString = JSON.stringify(param);
+        console.log(jsonString);
+
+        $http.post("/api/database/tables", jsonString).success(function(data) {
+            if (data.code == 200) {
+                $scope.resetRowStatus();
+                $scope.tables = data.data;
+            } else {
+                window.alert(data.message)
+            }
+        }).error(function (data) {
+            console.log('data=' + data);
+        });
+    };
+
+    $scope.select = function (index, table) {
+        if (!$scope.row_status[index]) {
+            $scope.row_status[index] = !$scope.row_status[index];
+        } else {
+            $scope.row_status[index] = !$scope.row_status[index];
+        }
     };
 
 }]);

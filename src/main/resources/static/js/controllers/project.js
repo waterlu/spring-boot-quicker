@@ -80,10 +80,12 @@ angular.module('app').controller('ProjectController', ['$scope', '$http', '$stat
         angular.forEach ($scope.dependencies, function (dependency, index) {
             if (dependency.selected) {
                 var item = {
+                    'name': null,
                     'groupId': null,
                     'artifactId': null,
                     "version":null
                 };
+                item.name = dependency.name;
                 item.groupId = dependency.groupId;
                 item.artifactId = dependency.artifactId;
                 item.version = dependency.version;
@@ -116,7 +118,11 @@ angular.module('app').controller('ProjectController', ['$scope', '$http', '$stat
 
         $http.post("/api/project/preview", jsonString).success(function (data) {
             console.log('code=' + data.code);
-            window.alert(data.data);
+            if (data.code == 200) {
+                window.alert(data.data);
+            } else {
+                window.alert(data.message);
+            }
         }).error(function (data) {
             console.log('code=' + data.code);
             console.log('data=' + data.data);

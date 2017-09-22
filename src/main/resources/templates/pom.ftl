@@ -52,6 +52,7 @@
             <artifactId>${dependency.artifactId}</artifactId>
             <version>${dependency.version}</version>
         </dependency>
+
         </#list>
 
     </dependencies>

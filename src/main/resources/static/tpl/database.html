@@ -53,7 +53,43 @@
                 <button type="submit" class="btn btn-success" ng-click="testDBConnection();">
                     <span class="glyphicon glyphicon-sort"></span> 连接测试
                 </button>
+                <button type="submit" class="btn btn-success" ng-click="readTables();">
+                    <span class="glyphicon glyphicon-list-alt"></span> 读取表
+                </button>
             </div>
         </div>
     </form>
+
+    <table ng-if="tables.length > 0" st-table="displayedCollection" st-safe-src="tables" class="table table-striped">
+        <thead>
+            <tr>
+                <th>名称</th>
+                <th>类型</th>
+                <th>备注</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat-start="row in displayedCollection">
+                <td><p>{{ row.name }}</p></td>
+                <td><p>{{ row.type }}</p></td>
+                <td><p>{{ row.remark }}</p></td>
+                <td>
+                    <button ng-if="row_status[$index]" class="btn btn-sm btn-primary" ng-click="select($index, row)">明细</button>
+                    <button ng-if="!row_status[$index]" class="btn btn-sm btn-success" ng-click="select($index, row)">关闭</button>
+                </td>
+            </tr>
+            <tr ng-repeat-end="">
+                <td colspan="4">
+                    <div uib-collapse="row_status[$index]">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <span>Test</span>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
