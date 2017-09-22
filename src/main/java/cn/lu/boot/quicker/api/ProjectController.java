@@ -22,7 +22,6 @@ import java.io.*;
 public class ProjectController {
 
     @RequestMapping(value = "/preview", method = RequestMethod.POST)
-    @ResponseBody
     public ResponseResult preview(@RequestBody ProjectInfoDTO projectInfoDTO) throws Exception {
         Template template = getTemplate("pom.ftl");
         StringWriter stringWriter = new StringWriter();

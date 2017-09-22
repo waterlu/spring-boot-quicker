@@ -25,6 +25,7 @@
     </properties>
 
     <dependencies>
+
         <!-- spring-boot-starter -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -36,19 +37,23 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
         <!-- log4j2 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-log4j2</artifactId>
             <version>${springBootVersion}</version>
         </dependency>
-        <#--<#list dependencies as dependency>-->
-        <#--<dependency>-->
-            <#--<groupId>${dependency.groupId}</groupId>-->
-            <#--<artifactId>${dependency.artifactId}</artifactId>-->
-            <#--<version>${dependency.version}</version>-->
-        <#--</dependency>-->
-        <#--</#list>-->
+
+        <#list dependencies as dependency>
+        <!-- ${dependency.name} -->
+        <dependency>
+            <groupId>${dependency.groupId}</groupId>
+            <artifactId>${dependency.artifactId}</artifactId>
+            <version>${dependency.version}</version>
+        </dependency>
+        </#list>
+
     </dependencies>
 
     <build>
@@ -67,6 +72,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>

@@ -128,10 +128,12 @@ angular.module('app').controller('ProjectController', ['$scope', '$http', '$stat
         angular.forEach ($scope.dependencies, function (dependency, index) {
             if (dependency.selected) {
                 var item = {
+                    'name': null,
                     'groupId': null,
                     'artifactId': null,
                     "version":null
                 };
+                item.name = dependency.name;
                 item.groupId = dependency.groupId;
                 item.artifactId = dependency.artifactId;
                 item.version = dependency.version;

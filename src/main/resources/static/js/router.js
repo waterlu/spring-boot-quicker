@@ -21,5 +21,10 @@ angular.module('app')
                     templateUrl: 'tpl/project.html',
                     controller: 'ProjectController'
                 })
+                .state('app.database', {
+                    url: '/database',
+                    templateUrl: 'tpl/database.html',
+                    controller: 'DatabaseController'
+                })
         }
     ]);

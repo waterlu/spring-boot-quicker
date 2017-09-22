@@ -3,13 +3,23 @@ package cn.lu.boot.quicker.entity;
 /**
  * Created by lutiehua on 2017/9/22.
  */
-public class ProjectDependecy {
+public class ProjectDependency {
+
+    private String name;
 
     private String groupId;
 
     private String artifactId;
 
     private String version;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getGroupId() {
         return groupId;
