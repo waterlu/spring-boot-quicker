@@ -2,12 +2,10 @@ package cn.lu.boot.quicker.api;
 
 import cn.lu.boot.quicker.common.ResponseResult;
 import cn.lu.boot.quicker.dto.DatabaseInfoDTO;
+import cn.lu.boot.quicker.entity.DBField;
 import cn.lu.boot.quicker.entity.Table;
 import cn.lu.boot.quicker.util.DBType;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -38,6 +36,15 @@ public class DatabaseController {
         ResponseResult responseResult = new ResponseResult();
         responseResult.setCode(ResponseResult.OK);
         responseResult.setData(tableList);
+        return responseResult;
+    }
+
+    @RequestMapping(value = "/tables/{tableName}", method = RequestMethod.POST)
+    public ResponseResult getTableColumns(@PathVariable String tableName, @RequestBody DatabaseInfoDTO databaseInfoDTO) throws Exception {
+        List<DBField> fieldList = getTableColumns(databaseInfoDTO, tableName);
+        ResponseResult responseResult = new ResponseResult();
+        responseResult.setCode(ResponseResult.OK);
+        responseResult.setData(fieldList);
         return responseResult;
     }
 
@@ -78,5 +85,40 @@ public class DatabaseController {
             tables.add(table);
         }
         return tables;
+    }
+
+    private List<DBField> getTableColumns(DatabaseInfoDTO databaseInfoDTO, String tableName) throws Exception {
+        Connection connection = getConnection(databaseInfoDTO);
+        DatabaseMetaData metaData = connection.getMetaData();
+        String primaryKeyFiledName = getTablePrimaryKey(metaData, tableName);
+        ResultSet resultSet = metaData.getColumns(null, null, tableName, null);
+        List<DBField> fieldList = new ArrayList<>();
+        while (resultSet.next()) {
+            DBField field = new DBField();
+            field.setColumnName(resultSet.getString("COLUMN_NAME"));
+            field.setTypeName(resultSet.getString("TYPE_NAME"));
+            field.setColumnSize(resultSet.getInt("COLUMN_SIZE"));
+            field.setDecimalDigits(resultSet.getInt("DECIMAL_DIGITS"));
+            field.setIsNullable(resultSet.getString("IS_NULLABLE"));
+            field.setRemarks(resultSet.getString("REMARKS"));
+            if (null != primaryKeyFiledName) {
+                if (field.getColumnName().equalsIgnoreCase(primaryKeyFiledName)) {
+                    field.setIsPrimaryKey("Y");
+                } else {
+                    field.setIsPrimaryKey("");
+                }
+            }
+            fieldList.add(field);
+        }
+
+        return fieldList;
+    }
+
+    private String getTablePrimaryKey(DatabaseMetaData metaData, String tableName) throws Exception {
+        ResultSet rs = metaData.getPrimaryKeys(null, null, tableName);
+        while (rs.next()) {
+            return rs.getString("COLUMN_NAME");
+        }
+        return null;
     }
 }

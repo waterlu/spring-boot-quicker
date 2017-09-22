@@ -13,6 +13,8 @@ angular.module('app').controller('DatabaseController', ['$scope', '$http', '$sta
     $scope.maxRows = 100;
 
     $scope.tables = [];
+    $scope.fields = [];
+
     $scope.row_status = [];
     for (var i = 0; i < $scope.maxRows; i++) {
         $scope.row_status[i] = true;
@@ -93,7 +95,46 @@ angular.module('app').controller('DatabaseController', ['$scope', '$http', '$sta
         if (!$scope.row_status[index]) {
             $scope.row_status[index] = !$scope.row_status[index];
         } else {
-            $scope.row_status[index] = !$scope.row_status[index];
+            var param = {
+                'dbType': null,
+                'dbIP': null,
+                'dbPort': null,
+                'dbName': null,
+                'dbUsername': null,
+                'dbPassword': null
+            };
+
+            param.dbType = $scope.dbType;
+            param.dbIP = $scope.dbIP;
+            param.dbPort = $scope.dbPort;
+            param.dbName = $scope.dbName;
+            param.dbUsername = $scope.dbUsername;
+            param.dbPassword = $scope.dbPassword;
+
+            var jsonString = JSON.stringify(param);
+            console.log(jsonString);
+            var tableName = table.name;
+            $http.post("/api/database/tables/" + tableName, jsonString).success(function(data) {
+                if (data.code == 200) {
+                    $scope.resetRowStatus();
+                    $scope.fields = data.data;
+                    $scope.row_status[index] = !$scope.row_status[index];
+                } else {
+                    window.alert(data.message)
+                }
+            }).error(function (data) {
+                console.log('data=' + data);
+            });
+        }
+    };
+
+    $scope.selectPrimaryFiled = function(index) {
+        var isPrimaryKey = $scope.fields[index].isPrimaryKey;
+        console.log('isPrimaryKey=' + isPrimaryKey);
+        if (isPrimaryKey) {
+            return "active";
+        } else {
+            return "";
         }
     };
 
