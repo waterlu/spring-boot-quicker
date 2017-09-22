@@ -1,0 +1,106 @@
+<div class="row">
+    <form class="form-horizontal">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <span>请填写项目相关信息，根据填写信息将自动创建SpringBoot项目</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="groupId" class="col-sm-2 control-label">groupId</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="groupId" ng-model="groupId"/>
+            </div>
+            <div class="col-sm-6">组织的唯一标识符</div>
+        </div>
+        <div class="form-group">
+            <label for="artifactId" class="col-sm-2 control-label">artifactId</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="artifactId" ng-model="artifactId"/>
+            </div>
+            <div class="col-sm-6">项目的唯一标识符</div>
+        </div>
+        <div class="form-group">
+            <label for="version" class="col-sm-2 control-label">version</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="version" ng-model="version"/>
+            </div>
+            <div class="col-sm-6">项目的版本</div>
+        </div>
+        <div class="form-group">
+            <label for="name" class="col-sm-2 control-label">name</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="name" ng-model="name"/>
+            </div>
+            <div class="col-sm-6">项目名称</div>
+        </div>
+        <div class="form-group">
+            <label for="description" class="col-sm-2 control-label">description</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="description" ng-model="description"/>
+            </div>
+            <div class="col-sm-6">项目简要介绍</div>
+        </div>
+        <div class="form-group">
+            <label for="springBootVersion" class="col-sm-2 control-label">spring-boot.version</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="springBootVersion" ng-model="springBootVersion"/>
+            </div>
+            <div class="col-sm-6">SpringBoot版本</div>
+        </div>
+        <div class="form-group">
+            <label for="javaVersion" class="col-sm-2 control-label">java.version</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="javaVersion" ng-model="javaVersion"/>
+            </div>
+            <div class="col-sm-6">JDK版本</div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <span>请选择需要依赖的项目</span>
+                <button class="btn btn-primary pull-right">
+                    <span class="glyphicon glyphicon-plus"></span> 添加
+                </button>
+            </div>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>选择</th>
+                    <th>项目</th>
+                    <th>groupId</th>
+                    <th>artifactId</th>
+                    <th>version</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="dependency in dependencies">
+                    <!--<td><p>{{dependency.selected}}</p></td>-->
+                    <td><input type="checkbox" ng-checked="{{dependency.selected}}"></td>
+                    <td><p>{{dependency.name}}</p></td>
+                    <td><p>{{dependency.groupId}}</p></td>
+                    <td><p>{{dependency.artifactId}}</p></td>
+                    <td><p>{{dependency.version}}</p></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-9">
+                <button type="submit" class="btn btn-primary" ng-click="editSetting();" ng-if="readonly">Edit</button>
+                <button type="submit" class="btn btn-success" ng-click="saveSetting();" ng-if="!readonly">
+                    <span class="glyphicon glyphicon-save"></span> 生成
+                </button>
+                <button type="submit" class="btn btn-success" ng-click="preview();" ng-if="!readonly">
+                    <span class="glyphicon glyphicon-eye-open"></span> 预览
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+<!--<h4>Connected Redis Server-->
+    <!--<button ng-click="refreshStatus()" class="btn btn-default btn-sm">-->
+        <!--<span class="glyphicon glyphicon-refresh"></span>-->
+    <!--</button>-->
+<!--</h4>-->

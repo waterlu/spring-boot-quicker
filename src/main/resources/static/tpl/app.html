@@ -1,0 +1,26 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Quicker</a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li ui-sref-active="active"><a ui-sref=".project">项目信息</a></li>
+        <li ui-sref-active="active"><a ui-sref=".redis">数据源信息</a></li>
+        <li ui-sref-active="active"><a ui-sref=".setting">Setting</a></li>
+        <li ui-sref-active="active"><a ui-sref=".about">关于</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="starter-template" ui-view></div>
+  <footer><p>&copy; 2017 Waterlu</p></footer>
+</div>
