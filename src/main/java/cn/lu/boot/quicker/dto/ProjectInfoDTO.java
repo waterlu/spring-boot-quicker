@@ -21,6 +21,8 @@ public class ProjectInfoDTO {
 
     private String javaVersion;
 
+    private String springBootVersion;
+
     private List<ProjectDependecy> dependencies;
 
     public String getGroupId() {
@@ -61,6 +63,14 @@ public class ProjectInfoDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getSpringBootVersion() {
+        return springBootVersion;
+    }
+
+    public void setSpringBootVersion(String springBootVersion) {
+        this.springBootVersion = springBootVersion;
     }
 
     public String getJavaVersion() {

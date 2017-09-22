@@ -2,7 +2,7 @@
 
 angular.module('app').controller('ProjectController', ['$scope', '$http', '$state', function($scope, $http, $state) {
 
-    console.log('ProjectController');
+    console.log('ProjectController 1.0.2');
 
     $scope.groupId = 'cn.zjhf.kingold';
     $scope.artifactId = 'service_demo';
@@ -76,46 +76,30 @@ angular.module('app').controller('ProjectController', ['$scope', '$http', '$stat
     $scope.initDefaultDependency();
 
     $scope.preview = function () {
-        $scope.list = new Array();
+        $scope.dependencyList = new Array();
         angular.forEach ($scope.dependencies, function (dependency, index) {
             if (dependency.selected) {
-                $scope.item = {'groupId': null,'artifactId': null,"version":null};
-                $scope.item.groupId = dependency.groupId;
-                $scope.item.artifactId = dependency.artifactId;
-                $scope.item.version = dependency.version;
-                $scope.list.push($scope.item);
+                var item = {
+                    'groupId': null,
+                    'artifactId': null,
+                    "version":null
+                };
+                item.groupId = dependency.groupId;
+                item.artifactId = dependency.artifactId;
+                item.version = dependency.version;
+                $scope.dependencyList.push(item);
             }
         });
 
-        // console.log($scope.list);
-
-        //var jsonString = angular.toJson($scope.list);
-        // var jsonString = JSON.stringify($scope.list);
-
-
-
-        // var fd = new FormData();
-        // fd.append('dependencies', jsonString);
-        // $http.post('/api/project/preview', fd, {
-        //     transformRequest: angular.identity,
-        //     headers: {
-        //         'Content-Type': undefined
-        //     }
-        // }).success(function (data){
-        //     console.log('success:' + data);
-        // }).error(function (data) {
-        //     console.log('error:' + data);
-        // });
-
         var param = {
-            "groupId": null,
-            "artifactId": null,
-            "version": null,
-            "name": null,
-            "description": null,
-            "javaVersion": null,
-            "springBootVersion": null,
-            "dependencies": null
+            'groupId': null,
+            'artifactId': null,
+            'version': null,
+            'name': null,
+            'description': null,
+            'javaVersion': null,
+            'springBootVersion': null,
+            'dependencies': null
         };
 
         param.groupId = $scope.groupId;
@@ -123,36 +107,67 @@ angular.module('app').controller('ProjectController', ['$scope', '$http', '$stat
         param.version = $scope.version;
         param.name = $scope.name;
         param.description = $scope.description;
-        param.springBootVersion = $scope.springBootVersion;
         param.javaVersion = $scope.javaVersion;
-        param.dependencies = $scope.list;
+        param.springBootVersion = $scope.springBootVersion;
+        param.dependencies = $scope.dependencyList;
 
         var jsonString = JSON.stringify(param);
         console.log(jsonString);
 
-        $http.post("/api/project/preview", jsonString);
+        $http.post("/api/project/preview", jsonString).success(function (data) {
+            console.log('code=' + data.code);
+            window.alert(data.data);
+        }).error(function (data) {
+            console.log('code=' + data.code);
+            console.log('data=' + data.data);
+        });
+    };
 
+    $scope.save = function () {
+        $scope.dependencyList = new Array();
+        angular.forEach ($scope.dependencies, function (dependency, index) {
+            if (dependency.selected) {
+                var item = {
+                    'groupId': null,
+                    'artifactId': null,
+                    "version":null
+                };
+                item.groupId = dependency.groupId;
+                item.artifactId = dependency.artifactId;
+                item.version = dependency.version;
+                $scope.dependencyList.push(item);
+            }
+        });
 
-        // $http({method: "POST",
-        //     url: "/api/project/preview",
-        //     headers: {
-        //         'Content-Type': 'application/x-www-form-urlencoded'
-        //     },
-        //     data: {
-        //         "groupId": $scope.groupId,
-        //         "artifactId": $scope.artifactId,
-        //         "version": $scope.version,
-        //         "name": $scope.name,
-        //         "description": $scope.description,
-        //         "javaVersion": $scope.javaVersion,
-        //         "springBootVersion": $scope.springBootVersion,
-        //         "dependencies": jsonString
-        //     }
-        // }).success(function(data) {
-        //     console.log('success:' + data);
-        // }).error(function(data){
-        //     console.log('error:' + data);
-        // });
+        var param = {
+            'groupId': null,
+            'artifactId': null,
+            'version': null,
+            'name': null,
+            'description': null,
+            'javaVersion': null,
+            'springBootVersion': null,
+            'dependencies': null
+        };
+
+        param.groupId = $scope.groupId;
+        param.artifactId = $scope.artifactId;
+        param.version = $scope.version;
+        param.name = $scope.name;
+        param.description = $scope.description;
+        param.javaVersion = $scope.javaVersion;
+        param.springBootVersion = $scope.springBootVersion;
+        param.dependencies = $scope.dependencyList;
+
+        var jsonString = JSON.stringify(param);
+        console.log(jsonString);
+
+        $http.post("/api/project/save", jsonString).success(function(data) {
+            console.log('code=' + data.code);
+            console.log('data=' + data.data);
+        }).error(function (data) {
+            console.log('data=' + data);
+        });
     };
 
 }]);
