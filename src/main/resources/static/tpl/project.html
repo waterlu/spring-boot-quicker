@@ -10,216 +10,207 @@
             <form class="form-horizontal">
                 <div class="bs-docs-section">
                     <h1 id="project_info" class="page-header">项目基本信息</h1>
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <span>项目信息</span>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">项目信息
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse_project_info">
+                                    <span class="glyphicon glyphicon-align-justify pull-right"></span>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse_project_info" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label for="groupId" class="col-sm-3 control-label">groupId</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="groupId" ng-model="groupId"/>
+                                    </div>
+                                    <div class="col-sm-5">组织的唯一标识符</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="artifactId" class="col-sm-3 control-label">artifactId</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="artifactId" ng-model="artifactId"/>
+                                    </div>
+                                    <div class="col-sm-5">项目的唯一标识符</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="version" class="col-sm-3 control-label">version</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="version" ng-model="version"/>
+                                    </div>
+                                    <div class="col-sm-5">项目的版本</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name" class="col-sm-3 control-label">name</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="name" ng-model="name"/>
+                                    </div>
+                                    <div class="col-sm-5">项目名称</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="description" class="col-sm-3 control-label">description</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="description" ng-model="description"/>
+                                    </div>
+                                    <div class="col-sm-5">项目简要介绍</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="springBootVersion" class="col-sm-3 control-label">spring-boot.version</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="springBootVersion" ng-model="springBootVersion"/>
+                                    </div>
+                                    <div class="col-sm-5">SpringBoot版本</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="javaVersion" class="col-sm-3 control-label">java.version</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="javaVersion" ng-model="javaVersion"/>
+                                    </div>
+                                    <div class="col-sm-5">JDK版本</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="groupId" class="col-sm-2 control-label">groupId</label>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control" id="groupId" ng-model="groupId"/>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">依赖项目
+                                <a class="pull-right" data-toggle="collapse" href="#collapse_project_dependency">
+                                    <span class="glyphicon glyphicon-align-justify pull-right"></span>
+                                </a>
+                                <!--<a class="pull-right">-->
+                                    <!--<span class="glyphicon glyphicon-plus"></span>-->
+                                <!--</a>-->
+                            </h4>
                         </div>
-                        <div class="col-sm-6">组织的唯一标识符</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="artifactId" class="col-sm-2 control-label">artifactId</label>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control" id="artifactId" ng-model="artifactId"/>
-                        </div>
-                        <div class="col-sm-6">项目的唯一标识符</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="version" class="col-sm-2 control-label">version</label>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control" id="version" ng-model="version"/>
-                        </div>
-                        <div class="col-sm-6">项目的版本</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="name" class="col-sm-2 control-label">name</label>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control" id="name" ng-model="name"/>
-                        </div>
-                        <div class="col-sm-6">项目名称</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="description" class="col-sm-2 control-label">description</label>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control" id="description" ng-model="description"/>
-                        </div>
-                        <div class="col-sm-6">项目简要介绍</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="springBootVersion" class="col-sm-2 control-label">spring-boot.version</label>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control" id="springBootVersion" ng-model="springBootVersion"/>
-                        </div>
-                        <div class="col-sm-6">SpringBoot版本</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="javaVersion" class="col-sm-2 control-label">java.version</label>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control" id="javaVersion" ng-model="javaVersion"/>
-                        </div>
-                        <div class="col-sm-6">JDK版本</div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <span>请选择需要依赖的项目</span>
-                            <button class="btn btn-default pull-right">
-                                <span class="glyphicon glyphicon-plus"></span> 添加
-                            </button>
+                        <div id="collapse_project_dependency" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>选择</th>
+                                        <th>项目</th>
+                                        <th>groupId</th>
+                                        <th>artifactId</th>
+                                        <th>version</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="dependency in dependencies">
+                                        <!--<td><input type="checkbox" ng-checked="{{dependency.selected}}"></td>-->
+                                        <td><input type="checkbox" ng-model="dependency.selected" ng-true-value='true'  ng-false-value="false"></td>
+                                        <td><p>{{dependency.name}}</p></td>
+                                        <td><p>{{dependency.groupId}}</p></td>
+                                        <td><p>{{dependency.artifactId}}</p></td>
+                                        <td><p>{{dependency.version}}</p></td>
+                                        <td></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>选择</th>
-                            <th>项目</th>
-                            <th>groupId</th>
-                            <th>artifactId</th>
-                            <th>version</th>
-                            <th>操作</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="dependency in dependencies">
-                            <!--<td><p>{{dependency.selected}}</p></td>-->
-                            <td><input type="checkbox" ng-checked="{{dependency.selected}}"></td>
-                            <td><p>{{dependency.name}}</p></td>
-                            <td><p>{{dependency.groupId}}</p></td>
-                            <td><p>{{dependency.artifactId}}</p></td>
-                            <td><p>{{dependency.version}}</p></td>
-                            <td></td>
-                        </tr>
-                        </tbody>
-                    </table>
                 </div>
 
                 <div class="bs-docs-section">
                     <h1 id="database_info" class="page-header">数据源信息</h1>
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <span>数据源信息</span>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">数据库连接
+                                <a class="pull-right" data-toggle="collapse" href="#collapse_database">
+                                    <span class="glyphicon glyphicon-align-justify pull-right"></span>
+                                </a>
+                            </h4>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="dbType" class="col-sm-2 control-label">类型</label>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control" id="dbType" ng-model="dbType" readonly />
-                        </div>
-                        <div class="col-sm-6"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="dbIP" class="col-sm-2 control-label">IP地址</label>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control" id="dbIP" ng-model="dbIP"/>
-                        </div>
-                        <div class="col-sm-6"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="dbPort" class="col-sm-2 control-label">端口号</label>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control" id="dbPort" ng-model="dbPort"/>
-                        </div>
-                        <div class="col-sm-6"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="dbName" class="col-sm-2 control-label">数据库名</label>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control" id="dbName" ng-model="dbName"/>
-                        </div>
-                        <div class="col-sm-6"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="dbUsername" class="col-sm-2 control-label">登录用户</label>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control" id="dbUsername" ng-model="dbUsername"/>
-                        </div>
-                        <div class="col-sm-6"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="dbPassword" class="col-sm-2 control-label">登录密码</label>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control" id="dbPassword" ng-model="dbPassword"/>
-                        </div>
-                        <div class="col-sm-6"></div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-9">
-                            <button type="submit" class="btn btn-primary" ng-click="testDBConnection();">
-                                <span class="glyphicon glyphicon-sort"></span> 连接测试
-                            </button>
-                            <button type="submit" class="btn btn-primary" ng-click="readTables();">
-                                <span class="glyphicon glyphicon-list-alt"></span> 读取表
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bs-docs-section">
-                    <h1 id="table_info" class="page-header">选择数据库表</h1>
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <span>选择数据库表</span>
-                        </div>
-                        <table ng-if="tables.length > 0" st-table="displayedCollection" st-safe-src="tables" class="table table-striped">
-                            <thead>
-                            <tr>
-                                <th>名称</th>
-                                <th>类型</th>
-                                <th>备注</th>
-                                <th>操作</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr ng-repeat-start="row in displayedCollection">
-                                <td><p>{{ row.name }}</p></td>
-                                <td><p>{{ row.type }}</p></td>
-                                <td><p>{{ row.remark }}</p></td>
-                                <td>
-                                    <button ng-if="row_status[$index]" class="btn btn-sm btn-primary" ng-click="select($index, row)">明细</button>
-                                    <button ng-if="!row_status[$index]" class="btn btn-sm btn-success" ng-click="select($index, row)">关闭</button>
-                                </td>
-                            </tr>
-                            <tr ng-repeat-end="">
-                                <td colspan="4">
-                                    <div uib-collapse="row_status[$index]">
-                                        <div class="panel panel-default">
-                                            <div class="panel-body">
-                                                <table class="table table-condensed">
-                                                    <thead>
-                                                    <tr>
-                                                        <th style="width: 20%">名称</th>
-                                                        <th style="width: 12%">类型</th>
-                                                        <th style="width: 8%">长度</th>
-                                                        <th style="width: 8%">精度</th>
-                                                        <th style="width: 8%">可空</th>
-                                                        <th style="width: 8%">主键</th>
-                                                        <th style="width: 36%">注释</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    <tr ng-repeat="field in fields">
-                                                        <td><p>{{field.columnName}}</p></td>
-                                                        <td><p>{{field.typeName}}</p></td>
-                                                        <td><p>{{field.columnSize}}</p></td>
-                                                        <td><p>{{field.decimalDigits}}</p></td>
-                                                        <td><p>{{field.isNullable}}</p></td>
-                                                        <td><p>{{field.isPrimaryKey}}</p></td>
-                                                        <td><p>{{field.remarks}}</p></td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
+                        <div id="collapse_database" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label for="dbType" class="col-sm-2 control-label">类型</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="dbType" ng-model="dbType" readonly />
                                     </div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                                    <div class="col-sm-6"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="dbIP" class="col-sm-2 control-label">IP地址</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="dbIP" ng-model="dbIP"/>
+                                    </div>
+                                    <div class="col-sm-6"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="dbPort" class="col-sm-2 control-label">端口号</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="dbPort" ng-model="dbPort"/>
+                                    </div>
+                                    <div class="col-sm-6"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="dbName" class="col-sm-2 control-label">数据库名</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="dbName" ng-model="dbName"/>
+                                    </div>
+                                    <div class="col-sm-6"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="dbUsername" class="col-sm-2 control-label">登录用户</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="dbUsername" ng-model="dbUsername"/>
+                                    </div>
+                                    <div class="col-sm-6"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="dbPassword" class="col-sm-2 control-label">登录密码</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="dbPassword" ng-model="dbPassword"/>
+                                    </div>
+                                    <div class="col-sm-6"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-9">
+                                        <button type="submit" class="btn btn-primary" ng-click="testDBConnection();">
+                                            <span class="glyphicon glyphicon-sort"></span> 连接测试
+                                        </button>
+                                        <button type="submit" class="btn btn-primary" ng-click="readTables();">
+                                            <span class="glyphicon glyphicon-list-alt"></span> 读取表
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">选择数据库表
+                                <a class="pull-right" data-toggle="collapse" href="#collapse_table">
+                                    <span class="glyphicon glyphicon-align-justify pull-right"></span>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse_table" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>选择</th>
+                                        <th>名称</th>
+                                        <th>类型</th>
+                                        <th>备注</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="table in tables">
+                                        <td><input type="checkbox" ng-model="table.selected" ng-true-value='true'  ng-false-value="false"></td>
+                                        <td><p>{{table.name}}</p></td>
+                                        <td><p>{{table.type}}</p></td>
+                                        <td><p>{{table.remark}}</p></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -238,9 +229,14 @@
         <div class="col-md-3" role="complementary">
             <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix-top">
                 <ul class="nav bs-docs-sidenav">
-                    <li><a href="#project_info">项目基本信息</a></li>
-                    <li><a href="#database_info">数据源信息</a></li>
-                    <li><a href="#table_info">选择数据库表</a></li>
+                    <!--<li><a href="#project_info" >项目基本信息</a></li>-->
+                    <!--<li><a href="#database_info">数据源信息</a></li>-->
+                    <!--<li><a href="#table_info">选择数据库表</a></li>-->
+                    <!--<li><a class="back-to-top" href="#top">返回顶部</a></li>-->
+                    <li><a href="javascript:document.getElementById('project_info').scrollIntoView()">项目基本信息</a></li>
+                    <li><a href="javascript:document.getElementById('database_info').scrollIntoView()">数据源信息</a></li>
+                    <li><a href="javascript:document.getElementById('table_info').scrollIntoView()">选择数据库表</a></li>
+                    <li><a class="back-to-top" href="javascript:document.getElementById('top').scrollIntoView()">返回顶部</a></li>
                 </ul>
             </nav>
         </div>

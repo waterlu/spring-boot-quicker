@@ -5,11 +5,21 @@ package cn.lu.boot.quicker.entity;
  */
 public class Table {
 
+    private boolean selected;
+
     private String name;
 
     private String type;
 
     private String remark;
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
 
     public String getName() {
         return name;
