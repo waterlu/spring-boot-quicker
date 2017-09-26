@@ -22,52 +22,52 @@
                             <div class="panel-body">
                                 <div class="form-group">
                                     <label for="groupId" class="col-sm-3 control-label">groupId</label>
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-5">
                                         <input type="text" class="form-control" id="groupId" ng-model="groupId"/>
                                     </div>
-                                    <div class="col-sm-5">组织的唯一标识符</div>
+                                    <div class="col-sm-4">组织的唯一标识符</div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="artifactId" class="col-sm-3 control-label">artifactId</label>
-                                    <div class="col-sm-4">
+                                    <label for="artifactId" class="col-sm-3 control-label text-danger">*artifactId</label>
+                                    <div class="col-sm-5">
                                         <input type="text" class="form-control" id="artifactId" ng-model="artifactId"/>
                                     </div>
-                                    <div class="col-sm-5">项目的唯一标识符</div>
+                                    <div class="col-sm-4">项目的唯一标识符</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="version" class="col-sm-3 control-label">version</label>
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-5">
                                         <input type="text" class="form-control" id="version" ng-model="version"/>
                                     </div>
-                                    <div class="col-sm-5">项目的版本</div>
+                                    <div class="col-sm-4">项目的版本</div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="name" class="col-sm-3 control-label">name</label>
-                                    <div class="col-sm-4">
+                                    <label for="name" class="col-sm-3 control-label text-danger">*name</label>
+                                    <div class="col-sm-5">
                                         <input type="text" class="form-control" id="name" ng-model="name"/>
                                     </div>
-                                    <div class="col-sm-5">项目名称</div>
+                                    <div class="col-sm-4">项目名称</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="description" class="col-sm-3 control-label">description</label>
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-5">
                                         <input type="text" class="form-control" id="description" ng-model="description"/>
                                     </div>
-                                    <div class="col-sm-5">项目简要介绍</div>
+                                    <div class="col-sm-4">项目简要介绍</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="springBootVersion" class="col-sm-3 control-label">spring-boot.version</label>
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-5">
                                         <input type="text" class="form-control" id="springBootVersion" ng-model="springBootVersion"/>
                                     </div>
-                                    <div class="col-sm-5">SpringBoot版本</div>
+                                    <div class="col-sm-4">SpringBoot版本</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="javaVersion" class="col-sm-3 control-label">java.version</label>
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-5">
                                         <input type="text" class="form-control" id="javaVersion" ng-model="javaVersion"/>
                                     </div>
-                                    <div class="col-sm-5">JDK版本</div>
+                                    <div class="col-sm-4">JDK版本</div>
                                 </div>
                             </div>
                         </div>
@@ -214,6 +214,76 @@
                     </div>
                 </div>
 
+                <div class="bs-docs-section">
+                    <h1 id="package_info" class="page-header">包信息</h1>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Package信息
+                                <a class="pull-right" data-toggle="collapse" href="#collapse_package">
+                                    <span class="glyphicon glyphicon-align-justify pull-right"></span>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse_package" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label for="author" class="col-sm-4 control-label text-danger">*作者</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="author" ng-model="author"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="javaDir" class="col-sm-4 control-label">源代码目录</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="javaDir" ng-model="javaDir"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="resourcesDir" class="col-sm-4 control-label">资源目录</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="resourcesDir" ng-model="resourcesDir"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="basePackage" class="col-sm-4 control-label text-danger">*基础package目录</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="basePackage" ng-model="basePackage"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="configPackage" class="col-sm-4 control-label">配置文件目录</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="configPackage" ng-model="configPackage"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="webPackage" class="col-sm-4 control-label">接口Controller目录</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="webPackage" ng-model="webPackage"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="servicePackage" class="col-sm-4 control-label">服务Service目录</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="servicePackage" ng-model="servicePackage"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="daoPackage" class="col-sm-4 control-label">持久化DAO目录</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="daoPackage" ng-model="daoPackage"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="entityPackage" class="col-sm-4 control-label">实体对象目录</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="entityPackage" ng-model="entityPackage"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-9">
                         <button type="submit" class="btn btn-primary" ng-click="save();">

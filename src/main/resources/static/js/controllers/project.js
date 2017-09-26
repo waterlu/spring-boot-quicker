@@ -18,7 +18,7 @@ angular.module('app').controller('ProjectController', ['$scope', '$http', '$stat
 
     // 数据库连接
     $scope.dbType = 'MySQL';
-    $scope.dbIP = '10.10.10.4';
+    $scope.dbIP = '10.10.10.18';
     $scope.dbPort = '3306';
     $scope.dbName = 'kingold';
     $scope.dbUsername = 'zj_admin';
@@ -28,12 +28,144 @@ angular.module('app').controller('ProjectController', ['$scope', '$http', '$stat
     $scope.tables = [];
     $scope.fields = [];
 
+    // 包信息
+    $scope.author = 'waterlu';
+    $scope.javaDir = 'src/main/java';
+    $scope.resourcesDir = 'src/main/resources';
+    $scope.basePackage = "cn.zjhf.kingold.demo";
+    $scope.configPackage = "config";
+    $scope.webPackage = "web";
+    $scope.servicePackage = "service";
+    $scope.daoPackage = "persistence.dao";
+    $scope.entityPackage = "entity";
+
     // 数据库表展开
     $scope.maxRows = 100;
     $scope.row_status = [];
     for (var i = 0; i < $scope.maxRows; i++) {
         $scope.row_status[i] = true;
     }
+
+    // 生成项目
+    $scope.save = function () {
+        // 依赖的项目
+        $scope.dependencyList = new Array();
+        angular.forEach ($scope.dependencies, function (dependency, index) {
+            if (dependency.selected) {
+                var item = {
+                    'name': null,
+                    'groupId': null,
+                    'artifactId': null,
+                    "version":null
+                };
+                item.name = dependency.name;
+                item.groupId = dependency.groupId;
+                item.artifactId = dependency.artifactId;
+                item.version = dependency.version;
+                $scope.dependencyList.push(item);
+            }
+        });
+
+        // 选择的数据库表
+        $scope.tableList = new Array();
+        angular.forEach ($scope.tables, function (table, index) {
+            console.log(table)
+            if (table.selected) {
+                var item = {
+                    'name': null,
+                    'remark': null
+                };
+                item.name = table.name;
+                item.remark = table.remark;
+                $scope.tableList.push(item);
+            }
+        });
+
+        // 封装请求参数
+        var param = {
+            'projectInfo': null,
+            'dependencies': null,
+            'databaseInfo': null,
+            'tables': null,
+            'packageInfo': null
+        };
+
+        var projectInfo = {
+            'groupId': null,
+            'artifactId': null,
+            'version': null,
+            'name': null,
+            'description': null,
+            'javaVersion': null,
+            'springBootVersion': null
+        };
+
+        var databaseInfo = {
+            'dbType': null,
+            'dbIP': null,
+            'dbPort': null,
+            'dbName': null,
+            'dbUsername': null,
+            'dbPassword': null
+        };
+
+        var packageInfo = {
+            'basePackage': null,
+            'configPackage': null,
+            'webPackage': null,
+            'servicePackage': null,
+            'daoPackage': null,
+            'entityPackage': null,
+            'author': null,
+            'javaDir': null,
+            'resourcesDir': null
+        };
+
+        projectInfo.groupId = $scope.groupId;
+        projectInfo.artifactId = $scope.artifactId;
+        projectInfo.version = $scope.version;
+        projectInfo.name = $scope.name;
+        projectInfo.description = $scope.description;
+        projectInfo.javaVersion = $scope.javaVersion;
+        projectInfo.springBootVersion = $scope.springBootVersion;
+
+        databaseInfo.dbType = $scope.dbType;
+        databaseInfo.dbIP = $scope.dbIP;
+        databaseInfo.dbPort = $scope.dbPort;
+        databaseInfo.dbName = $scope.dbName;
+        databaseInfo.dbUsername = $scope.dbUsername;
+        databaseInfo.dbPassword = $scope.dbPassword;
+
+        packageInfo.basePackage = $scope.basePackage;
+        packageInfo.configPackage = $scope.configPackage;
+        packageInfo.webPackage = $scope.webPackage;
+        packageInfo.servicePackage = $scope.servicePackage;
+        packageInfo.daoPackage = $scope.daoPackage;
+        packageInfo.entityPackage = $scope.entityPackage;
+        packageInfo.author = $scope.author;
+        packageInfo.javaDir =$scope.javaDir;
+        packageInfo.resourcesDir = $scope.resourcesDir;
+
+        param.projectInfo = projectInfo;
+        param.dependencies = $scope.dependencyList;
+        param.databaseInfo = databaseInfo;
+        param.tables = $scope.tableList;
+        param.packageInfo = packageInfo;
+
+        var jsonString = JSON.stringify(param);
+        console.log(jsonString);
+
+        $http.post("/api/project/save", jsonString).success(function(data) {
+            if (data.code == 200) {
+                window.alert(data.data);
+            } else {
+                window.alert(data.message);
+            }
+            window.alert(data.data);
+        }).error(function (data) {
+            console.log('data=' + data);
+        });
+    };
 
     $scope.resetRowStatus = function () {
         for (var i = 0; i < $scope.row_status.length; i++) {
@@ -288,86 +420,6 @@ angular.module('app').controller('ProjectController', ['$scope', '$http', '$stat
         } else {
             return "";
         }
-    };
-
-    // 生成项目
-    $scope.save = function () {
-        // 依赖的项目
-        $scope.dependencyList = new Array();
-        angular.forEach ($scope.dependencies, function (dependency, index) {
-            if (dependency.selected) {
-                var item = {
-                    'name': null,
-                    'groupId': null,
-                    'artifactId': null,
-                    "version":null
-                };
-                item.name = dependency.name;
-                item.groupId = dependency.groupId;
-                item.artifactId = dependency.artifactId;
-                item.version = dependency.version;
-                $scope.dependencyList.push(item);
-            }
-        });
-
-        // 选择的数据库表
-        $scope.tableList = new Array();
-        angular.forEach ($scope.tables, function (table, index) {
-            console.log(table)
-            if (table.selected) {
-                var item = {
-                    'name': null
-                };
-                item.name = table.name;
-                $scope.tableList.push(item);
-            }
-        });
-
-        // 封装请求参数
-        var param = {
-            'groupId': null,
-            'artifactId': null,
-            'version': null,
-            'name': null,
-            'description': null,
-            'javaVersion': null,
-            'springBootVersion': null,
-            'dependencies': null,
-            'dbType': null,
-            'dbIP': null,
-            'dbPort': null,
-            'dbName': null,
-            'dbUsername': null,
-            'dbPassword': null,
-            'tables': null
-        };
-
-        param.groupId = $scope.groupId;
-        param.artifactId = $scope.artifactId;
-        param.version = $scope.version;
-        param.name = $scope.name;
-        param.description = $scope.description;
-        param.javaVersion = $scope.javaVersion;
-        param.springBootVersion = $scope.springBootVersion;
-        param.dependencies = $scope.dependencyList;
-
-        param.dbType = $scope.dbType;
-        param.dbIP = $scope.dbIP;
-        param.dbPort = $scope.dbPort;
-        param.dbName = $scope.dbName;
-        param.dbUsername = $scope.dbUsername;
-        param.dbPassword = $scope.dbPassword;
-        param.tables = $scope.tableList;
-
-        var jsonString = JSON.stringify(param);
-        console.log(jsonString);
-
-        $http.post("/api/project/save", jsonString).success(function(data) {
-            console.log('code=' + data.code);
-            console.log('data=' + data.data);
-        }).error(function (data) {
-            console.log('data=' + data);
-        });
     };
 
 }]);

@@ -3,8 +3,8 @@ package cn.lu.boot.quicker.api;
 import cn.lu.boot.quicker.common.ResponseResult;
 import cn.lu.boot.quicker.dto.DatabaseInfoDTO;
 import cn.lu.boot.quicker.entity.DBField;
-import cn.lu.boot.quicker.entity.Table;
-import cn.lu.boot.quicker.util.DBType;
+import cn.lu.boot.quicker.entity.DBTable;
+import cn.lu.boot.quicker.common.DBType;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Connection;
@@ -32,7 +32,7 @@ public class DatabaseController {
 
     @RequestMapping(value = "/tables", method = RequestMethod.POST)
     public ResponseResult getTables(@RequestBody DatabaseInfoDTO databaseInfoDTO) throws Exception {
-        List<Table> tableList = getTableNames(databaseInfoDTO);
+        List<DBTable> tableList = getTableNames(databaseInfoDTO);
         ResponseResult responseResult = new ResponseResult();
         responseResult.setCode(ResponseResult.OK);
         responseResult.setData(tableList);
@@ -71,14 +71,14 @@ public class DatabaseController {
         return connectionRUL;
     }
 
-    private List<Table> getTableNames(DatabaseInfoDTO databaseInfoDTO) throws Exception {
+    private List<DBTable> getTableNames(DatabaseInfoDTO databaseInfoDTO) throws Exception {
         Connection connection = getConnection(databaseInfoDTO);
-        List<Table> tables = new ArrayList<>();
+        List<DBTable> tables = new ArrayList<>();
         DatabaseMetaData metaData = connection.getMetaData();
         String[] types = { "TABLE", "VIEW" };
         ResultSet resultSet = metaData.getTables(null, databaseInfoDTO.getDbUsername().toUpperCase(), null, types);
         while (resultSet.next()) {
-            Table table = new Table();
+            DBTable table = new DBTable();
             table.setName(resultSet.getString("TABLE_NAME"));
             table.setType(resultSet.getString("TABLE_TYPE"));
             table.setRemark(resultSet.getString("REMARKS"));

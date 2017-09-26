@@ -23,4 +23,6 @@ public class BaseConfig {
         HttpMessageConverter<?> converter = fastConverter;
         return new HttpMessageConverters(converter);
     }
+
+
 }

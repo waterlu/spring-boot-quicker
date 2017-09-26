@@ -1,9 +1,9 @@
-package cn.lu.boot.quicker.entity;
+package cn.lu.boot.quicker.dto;
 
 /**
- * Created by lutiehua on 2017/9/22.
+ * Created by lutiehua on 2017/9/26.
  */
-public class ProjectDependency {
+public class DependencyDTO {
 
     private String name;
 
@@ -44,4 +44,5 @@ public class ProjectDependency {
     public void setVersion(String version) {
         this.version = version;
     }
+
 }

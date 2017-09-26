@@ -3,7 +3,7 @@ package cn.lu.boot.quicker.entity;
 /**
  * Created by lutiehua on 2017/9/22.
  */
-public class Table {
+public class DBTable {
 
     private boolean selected;
 

@@ -1,11 +1,7 @@
 package cn.lu.boot.quicker.dto;
 
-import cn.lu.boot.quicker.entity.ProjectDependency;
-
-import java.util.List;
-
 /**
- * Created by lutiehua on 2017/9/22.
+ * Created by lutiehua on 2017/9/26.
  */
 public class ProjectInfoDTO {
 
@@ -22,8 +18,6 @@ public class ProjectInfoDTO {
     private String javaVersion;
 
     private String springBootVersion;
-
-    private List<ProjectDependency> dependencies;
 
     public String getGroupId() {
         return groupId;
@@ -65,14 +59,6 @@ public class ProjectInfoDTO {
         this.description = description;
     }
 
-    public String getSpringBootVersion() {
-        return springBootVersion;
-    }
-
-    public void setSpringBootVersion(String springBootVersion) {
-        this.springBootVersion = springBootVersion;
-    }
-
     public String getJavaVersion() {
         return javaVersion;
     }
@@ -81,11 +67,11 @@ public class ProjectInfoDTO {
         this.javaVersion = javaVersion;
     }
 
-    public List<ProjectDependency> getDependencies() {
-        return dependencies;
+    public String getSpringBootVersion() {
+        return springBootVersion;
     }
 
-    public void setDependencies(List<ProjectDependency> dependencies) {
-        this.dependencies = dependencies;
+    public void setSpringBootVersion(String springBootVersion) {
+        this.springBootVersion = springBootVersion;
     }
 }

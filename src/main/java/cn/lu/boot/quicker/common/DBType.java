@@ -1,4 +1,4 @@
-package cn.lu.boot.quicker.util;
+package cn.lu.boot.quicker.common;
 
 public enum DBType {
 	Oracle("oracle.jdbc.driver.OracleDriver", "jdbc:oracle:thin:@%s:%d:%s"),
