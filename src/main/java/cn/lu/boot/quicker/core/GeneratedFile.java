@@ -16,20 +16,10 @@ public abstract class GeneratedFile {
 
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-//    /**
-//     * 模板
-//     */
-//    protected Template template;
-//
-//    /**
-//     * 文件名称
-//     */
-//    protected String fileName;
-//
-//    /**
-//     * 文件内容
-//     */
-//    protected String content;
+    /**
+     * 项目根目录
+     */
+    protected String rootDir = "/tmp";
 
     /**
      * 模板
@@ -80,12 +70,14 @@ public abstract class GeneratedFile {
         String fileDir = fileName.substring(0, pos + 1);
 
         File dir = new File(fileDir);
-        if (dir.exists()) {
-            dir.delete();
+        if (!dir.exists()) {
+            dir.mkdirs();
         }
-        boolean flag = dir.mkdirs();
 
         File file = new File(fileName);
+        if (file.exists()) {
+            file.delete();
+        }
         file.createNewFile();
 
         // 根据模板生成文件

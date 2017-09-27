@@ -19,6 +19,8 @@ public class PackageInfoDTO {
 
     private String entityPackage;
 
+    private String dtoPackage;
+
     private String author;
 
     private String javaDir;
@@ -71,6 +73,14 @@ public class PackageInfoDTO {
 
     public void setEntityPackage(String entityPackage) {
         this.entityPackage = entityPackage;
+    }
+
+    public String getDtoPackage() {
+        return dtoPackage;
+    }
+
+    public void setDtoPackage(String dtoPackage) {
+        this.dtoPackage = dtoPackage;
     }
 
     public String getAuthor() {

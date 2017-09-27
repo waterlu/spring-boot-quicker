@@ -99,13 +99,13 @@ public class DatabaseController {
             field.setTypeName(resultSet.getString("TYPE_NAME"));
             field.setColumnSize(resultSet.getInt("COLUMN_SIZE"));
             field.setDecimalDigits(resultSet.getInt("DECIMAL_DIGITS"));
-            field.setIsNullable(resultSet.getString("IS_NULLABLE"));
+            field.setNullableShow(resultSet.getString("IS_NULLABLE"));
             field.setRemarks(resultSet.getString("REMARKS"));
             if (null != primaryKeyFiledName) {
                 if (field.getColumnName().equalsIgnoreCase(primaryKeyFiledName)) {
-                    field.setIsPrimaryKey("Y");
+                    field.setPrimaryKeyShow("Y");
                 } else {
-                    field.setIsPrimaryKey("");
+                    field.setPrimaryKeyShow("");
                 }
             }
             fieldList.add(field);

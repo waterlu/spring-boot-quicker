@@ -38,6 +38,8 @@ angular.module('app').controller('ProjectController', ['$scope', '$http', '$stat
     $scope.servicePackage = "service";
     $scope.daoPackage = "persistence.dao";
     $scope.entityPackage = "entity";
+    $scope.dtoPackage = "dto";
+
 
     // 数据库表展开
     $scope.maxRows = 100;
@@ -116,6 +118,7 @@ angular.module('app').controller('ProjectController', ['$scope', '$http', '$stat
             'servicePackage': null,
             'daoPackage': null,
             'entityPackage': null,
+            'dtoPackage': null,
             'author': null,
             'javaDir': null,
             'resourcesDir': null
@@ -142,6 +145,7 @@ angular.module('app').controller('ProjectController', ['$scope', '$http', '$stat
         packageInfo.servicePackage = $scope.servicePackage;
         packageInfo.daoPackage = $scope.daoPackage;
         packageInfo.entityPackage = $scope.entityPackage;
+        packageInfo.dtoPackage = $scope.dtoPackage;
         packageInfo.author = $scope.author;
         packageInfo.javaDir =$scope.javaDir;
         packageInfo.resourcesDir = $scope.resourcesDir;
@@ -161,7 +165,6 @@ angular.module('app').controller('ProjectController', ['$scope', '$http', '$stat
             } else {
                 window.alert(data.message);
             }
-            window.alert(data.data);
         }).error(function (data) {
             console.log('data=' + data);
         });

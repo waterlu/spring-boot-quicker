@@ -2,7 +2,9 @@ package cn.lu.boot.quicker.api;
 
 import cn.lu.boot.quicker.common.ResponseResult;
 import cn.lu.boot.quicker.core.GeneratedFile;
+import cn.lu.boot.quicker.core.GeneratedJavaDTOClass;
 import cn.lu.boot.quicker.core.GeneratedJavaEntityClass;
+import cn.lu.boot.quicker.dto.ClassInfoDTO;
 import cn.lu.boot.quicker.dto.GeneratedInfoDTO;
 import cn.lu.boot.quicker.dto.TableDTO;
 import freemarker.template.Configuration;
@@ -11,7 +13,9 @@ import freemarker.template.TemplateExceptionHandler;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -39,21 +43,43 @@ public class ProjectController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ResponseResult generate(@RequestBody GeneratedInfoDTO projectInfoDTO) throws Exception {
 
-        // 复制属性
-        projectInfoDTO.getPackageInfo().setProjectName(projectInfoDTO.getProjectInfo().getName());
-
         // 需要生成的文件列表
         List<GeneratedFile> generatedFileList = new ArrayList<>();
 
-        // 实体类
+        // 当前日期
+        Date now = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String date = dateFormat.format(now);
+
+
         List<TableDTO> tableList = projectInfoDTO.getTables();
         if (null != tableList) {
             for (TableDTO tableDTO : tableList) {
-                GeneratedJavaEntityClass javaEntityClass = new GeneratedJavaEntityClass(
-                        projectInfoDTO.getDatabaseInfo(), tableDTO, projectInfoDTO.getPackageInfo());
+                //整理配置参数
+                ClassInfoDTO classInfoDTO = new ClassInfoDTO();
+                classInfoDTO.setProjectName(projectInfoDTO.getProjectInfo().getName());
+                classInfoDTO.setClassName(tableDTO.getName());
+                classInfoDTO.setClassRemark(tableDTO.getRemark());
+                classInfoDTO.setClassAuthor(projectInfoDTO.getPackageInfo().getAuthor());
+                classInfoDTO.setClassDate(date);
+
+                // 实体类
+                GeneratedJavaEntityClass javaEntityClass = new GeneratedJavaEntityClass(classInfoDTO,
+                        projectInfoDTO.getDatabaseInfo(), projectInfoDTO.getPackageInfo());
                 generatedFileList.add(javaEntityClass);
+
+                // 数据转换对象类
+                GeneratedJavaDTOClass javaDTOClass = new GeneratedJavaDTOClass(classInfoDTO,
+                        projectInfoDTO.getDatabaseInfo(), projectInfoDTO.getPackageInfo());
+                generatedFileList.add(javaDTOClass);
+
+                // Controller类
+
             }
         }
+
+
+
 
         // POM文件
 

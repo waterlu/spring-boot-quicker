@@ -1,5 +1,6 @@
 package cn.lu.boot.quicker.core.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ public class JavaField {
 
     private String remark;
 
-    private List<JavaAnnotation> annotations;
+    private List<JavaAnnotation> annotations = new ArrayList<>();
 
     public String getScope() {
         return scope;

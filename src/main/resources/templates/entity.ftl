@@ -19,16 +19,6 @@ public class ${className} implements Serializable {
     private ${field.type} ${field.name};
     </#list>
 
-    <#list methods as method>
-
-    /**
-    * ${method.remark}
-    */
-    ${method.scope} ${method.return} ${method.name} (${method.param}) ${method.exception} {
-        ${method.body}
-    }
-    </#list>
-
     <#list fields as field>
 
     public ${field.type} get${field.name?cap_first}() {

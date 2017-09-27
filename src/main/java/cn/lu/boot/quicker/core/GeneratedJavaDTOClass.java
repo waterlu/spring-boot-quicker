@@ -1,21 +1,26 @@
 package cn.lu.boot.quicker.core;
 
+import cn.lu.boot.quicker.common.DBDataType;
+import cn.lu.boot.quicker.core.model.JavaAnnotation;
 import cn.lu.boot.quicker.core.model.JavaClassModel;
 import cn.lu.boot.quicker.core.model.JavaField;
 import cn.lu.boot.quicker.core.model.JavaImport;
+import cn.lu.boot.quicker.core.util.DBUtil;
+import cn.lu.boot.quicker.core.util.DirUtil;
 import cn.lu.boot.quicker.dto.ClassInfoDTO;
 import cn.lu.boot.quicker.dto.DatabaseInfoDTO;
 import cn.lu.boot.quicker.dto.PackageInfoDTO;
 import cn.lu.boot.quicker.entity.DBField;
-import cn.lu.boot.quicker.core.util.DBUtil;
-import cn.lu.boot.quicker.core.util.DirUtil;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by lutiehua on 2017/9/26.
  */
-public class GeneratedJavaEntityClass extends GeneratedJavaDatabaseClass {
+public class GeneratedJavaDTOClass extends GeneratedJavaDatabaseClass {
 
     /**
      * 类名
@@ -27,28 +32,33 @@ public class GeneratedJavaEntityClass extends GeneratedJavaDatabaseClass {
      */
     protected String packageName;
 
-    public GeneratedJavaEntityClass(ClassInfoDTO classInfo) {
+    /**
+     * 构造函数
+     *
+     * @param classInfo
+     */
+    public GeneratedJavaDTOClass(ClassInfoDTO classInfo) {
         super(classInfo);
     }
 
-    public GeneratedJavaEntityClass(ClassInfoDTO classInfo, DatabaseInfoDTO databaseInfo) {
+    public GeneratedJavaDTOClass(ClassInfoDTO classInfo, DatabaseInfoDTO databaseInfo) {
         super(classInfo, databaseInfo);
     }
 
-    public GeneratedJavaEntityClass(ClassInfoDTO classInfo, DatabaseInfoDTO databaseInfo, PackageInfoDTO packageInfo) {
+    public GeneratedJavaDTOClass(ClassInfoDTO classInfo, DatabaseInfoDTO databaseInfo, PackageInfoDTO packageInfo) {
         super(classInfo, databaseInfo);
-        this.className = DBUtil.toJavaClassName(classBaseName);
+        this.className = DBUtil.toJavaClassName(classBaseName) + "DTO";
         String javaFileName = className + ".java";
-        this.packageName = packageInfo.getBasePackage() + "." + packageInfo.getEntityPackage();
+        this.packageName = packageInfo.getBasePackage() + "." + packageInfo.getDtoPackage();
         String packageDir = DirUtil.package2Dir(packageName);
         this.fileName = String.format("%s/%s/%s/%s/%s", rootDir, projectName, packageInfo.getJavaDir(), packageDir, javaFileName);
 
-        this.classRemark += "实体类";
+        this.classRemark += "数据转换对象类";
     }
 
     @Override
     public String getTemplateName() {
-        return "entity.ftl";
+        return "dto.ftl";
     }
 
     @Override
@@ -69,6 +79,27 @@ public class GeneratedJavaEntityClass extends GeneratedJavaDatabaseClass {
             fieldType = super.parseJavaImportType(fieldType);
             javaField.setType(fieldType);
             javaField.setRemark(field.getRemarks());
+
+            if(!field.isNullable()) {
+                JavaAnnotation annotation = new JavaAnnotation();
+                String importName = super.parseJavaImportType("org.hibernate.validator.constraints.NotEmpty");
+                annotation.setName(importName);
+                javaField.getAnnotations().add(annotation);
+            }
+
+            if (super.isCharType(field.getDataType())) {
+                JavaAnnotation annotation = new JavaAnnotation();
+                String importName = super.parseJavaImportType("javax.validation.constraints.Size");
+                annotation.setName(importName);
+//                if (field.getDataType() == DBDataType.CHAR) {
+//                    annotation.addProp("min", Integer.toString(field.getColumnSize()));
+//                } else {
+//                    annotation.addProp("min", "0");
+//                }
+                annotation.addProp("max", Integer.toString(field.getColumnSize()));
+                javaField.getAnnotations().add(annotation);
+            }
+
             javaFieldList.add(javaField);
         }
 
@@ -87,5 +118,4 @@ public class GeneratedJavaEntityClass extends GeneratedJavaDatabaseClass {
 
         return true;
     }
-
 }
